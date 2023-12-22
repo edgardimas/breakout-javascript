@@ -1,3 +1,7 @@
 h1 {
   color: aliceblue;
 }
+
+canvas {
+  background: gainsboro;
+}
