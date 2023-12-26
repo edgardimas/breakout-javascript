@@ -1,5 +1,8 @@
+import { drawBricks } from "./brick.js";
+
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
+
 let ballRadius = 10;
 let paddleHeight = 10;
 let paddleWidth = 75;
@@ -63,6 +66,7 @@ function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
   drawPaddle();
+  drawBricks();
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) dx = -dx;
   if (y + dy < ballRadius) {
     dy = -dy;
