@@ -3,6 +3,7 @@ import { drawBricks, collisionDetection } from "./brick.js";
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 
+let score = 0;
 let ballRadius = 10;
 let paddleHeight = 10;
 let paddleWidth = 75;
@@ -46,6 +47,12 @@ function drawPaddle() {
   ctx.closePath();
 }
 
+function drawScore() {
+  ctx.font = "16px Arial";
+  ctx.fillStyle = "#0095DD";
+  ctx.fillText(`Score: ${score}`, 8, 20);
+}
+
 function keyDownHandler(e) {
   if (e.key === "Right" || e.key === "ArrowRight") {
     rightPressed = true;
@@ -64,12 +71,15 @@ function keyUpHandler(e) {
 
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawScore();
   drawBall();
   drawPaddle();
   drawBricks();
   let newDy = collisionDetection(x, y, dx, dy);
   if (newDy) {
+    console.log(newDy);
     dy = newDy;
+    score++;
   }
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) dx = -dx;
   if (y + dy < ballRadius) {
