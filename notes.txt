@@ -45,3 +45,28 @@ ctx.arc(x,y, ballRadius, 0, Math.PI * 2)
 Bouncing off the top and bottom.
 
 There are four walls to bounce the ball off - let;s focus on the top one first. 
+
+function mouseMoveHandler(e) {
+  const relativeX = e.clientX - canvas.offsetLeft;
+  if (relativeX > 0 && relativeX < canvas.width) {
+    paddleX = relativeX - paddleWidth / 2;
+  }
+}
+
+in this function 
+we first work out relativeX value,
+which is equal to the horizontal mouse position
+in the viewport (e.clientX) minus the distance between
+the left edge of the canvas and left edge
+of the viewport (canvas.offsetLeft)
+effectively this is equal to the distance
+between the canvas left edge and the mouse pointer.
+
+if the relative x pointer position is greater than zero and lower than the canvas widththe pointer is within the canvas boundaries and the paddleX position 
+(anchored on the left edge of the paddle)
+is set to the relativeX value minus halft the width of the paddle,
+so that the movement will actually be relative to the middle
+of the paddle. 
+
+
+

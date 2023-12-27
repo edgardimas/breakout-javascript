@@ -18,6 +18,7 @@ let rightPressed = false;
 let leftPressed = false;
 document.addEventListener("keydown", keyDownHandler, false);
 document.addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("mousemove", mouseMoveHandler, false);
 /**
  * in the "addEventListener" method in JavaScript, the first argument represents the type of event
  * for which you want to listen. The event types are specified as strings.
@@ -70,12 +71,19 @@ function keyUpHandler(e) {
   }
 }
 
+function mouseMoveHandler(e) {
+  const relativeX = e.clientX - canvas.offsetLeft;
+  if (relativeX > 0 && relativeX < canvas.width) {
+    paddleX = relativeX - paddleWidth / 2;
+  }
+}
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawScore();
   drawBall();
   drawPaddle();
   drawBricks();
+
   let newDy = collisionDetection(x, y, dx, dy);
   if (newDy) {
     console.log(newDy);
