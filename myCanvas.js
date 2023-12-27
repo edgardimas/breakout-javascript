@@ -1,4 +1,4 @@
-import { drawBricks } from "./brick.js";
+import { drawBricks, collisionDetection } from "./brick.js";
 
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
@@ -67,6 +67,10 @@ function draw() {
   drawBall();
   drawPaddle();
   drawBricks();
+  let newDy = collisionDetection(x, y, dx, dy);
+  if (newDy) {
+    dy = newDy;
+  }
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) dx = -dx;
   if (y + dy < ballRadius) {
     dy = -dy;
