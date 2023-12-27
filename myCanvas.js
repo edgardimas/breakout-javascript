@@ -2,7 +2,8 @@ import { drawBricks, collisionDetection } from "./brick.js";
 
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
-
+const brickRowCount = 3;
+const brickColumnCount = 5;
 let score = 0;
 let ballRadius = 10;
 let paddleHeight = 10;
@@ -80,6 +81,19 @@ function draw() {
     console.log(newDy);
     dy = newDy;
     score++;
+    console.log(
+      "score ",
+      score,
+      "brickRowCount: ",
+      brickRowCount,
+      "brickColumnCount ",
+      brickColumnCount
+    );
+    if (score === brickRowCount * brickColumnCount) {
+      alert("You win, congratulations");
+      document.location.reload();
+      clearInterval(interval);
+    }
   }
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) dx = -dx;
   if (y + dy < ballRadius) {
